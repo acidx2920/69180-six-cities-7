@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Index from '../index/index';
+import Main from '../main/main';
 
 function App({proposalsNum}) {
   return (
@@ -33,7 +33,7 @@ function App({proposalsNum}) {
           </div>
         </div>
       </header>
-      <Index proposalsNum={proposalsNum} />
+      <Main proposalsNum={proposalsNum} />
     </div>
   );
 }

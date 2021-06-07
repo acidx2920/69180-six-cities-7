@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Card from '../card/card';
 
-function Index({proposalsNum}) {
+function Main({proposalsNum}) {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -76,8 +76,8 @@ function Index({proposalsNum}) {
   );
 }
 
-Index.propTypes = {
+Main.propTypes = {
   proposalsNum: PropTypes.number,
 };
 
-export default Index;
+export default Main;
