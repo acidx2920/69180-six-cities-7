@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import {AppRoutes} from '../../const';
+import {AppRoutes} from '../../consts';
 
 import Main from '../main/main';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
-import Property from '../property/property';
+import Offer from '../offer/offer';
 import Page404 from '../page-404/page-404';
 
 function App({offersNum}) {
@@ -23,7 +23,7 @@ function App({offersNum}) {
           <Favorites />
         </Route>
         <Route exact path={AppRoutes.ROOM}>
-          <Property />
+          <Offer />
         </Route>
         <Route>
           <Page404 />

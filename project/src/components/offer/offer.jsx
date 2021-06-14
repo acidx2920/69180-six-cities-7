@@ -2,7 +2,7 @@ import React from 'react';
 
 import Logo from '../logo/logo';
 
-function Property() {
+function Offer() {
   return (
     <div className="page">
       <header className="header">
@@ -334,4 +334,4 @@ function Property() {
   );
 }
 
-export default Property;
+export default Offer;
