@@ -4,3 +4,10 @@ export const AppRoutes = {
   ROOM: '/offer/:id',
   ROOT: '/',
 };
+
+export const OfferTypes = {
+  apartment: 'Apartment',
+  room: 'Private Room',
+  house: 'House',
+  hotel: 'Hotel',
+};

@@ -27,10 +27,10 @@ const offers = [
     bedrooms: 3,
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
     host: {
-      avatarUrl: 'img/1.png',
       id: 3,
-      isPro: true,
       name: 'Angelina',
+      avatarUrl: 'img/1.png',
+      isPro: true,
     },
   },
   {
@@ -41,7 +41,7 @@ const offers = [
     images: ['img/room.jpg'],
     price: 80,
     rating: 4.0,
-    type: 'private room',
+    type: 'room',
     isFavorite: true,
     isPremium: false,
     city: {
@@ -61,10 +61,10 @@ const offers = [
     bedrooms: 3,
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
     host: {
-      avatarUrl: 'img/1.png',
       id: 3,
-      isPro: true,
       name: 'Angelina',
+      avatarUrl: 'img/1.png',
+      isPro: true,
     },
   },
   {
@@ -95,10 +95,10 @@ const offers = [
     bedrooms: 3,
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
     host: {
-      avatarUrl: 'img/1.png',
       id: 3,
-      isPro: true,
       name: 'Angelina',
+      avatarUrl: 'img/1.png',
+      isPro: true,
     },
   },
   {
@@ -129,10 +129,10 @@ const offers = [
     bedrooms: 3,
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
     host: {
-      avatarUrl: 'img/1.png',
       id: 3,
-      isPro: true,
       name: 'Angelina',
+      avatarUrl: 'img/1.png',
+      isPro: true,
     },
   },
 ];

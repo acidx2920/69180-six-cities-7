@@ -8,19 +8,22 @@ import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import Offer from '../offer/offer';
 import Page404 from '../page-404/page-404';
+import offerProp from '../offer/offer.prop';
 
-function App({offersNum}) {
+function App(props) {
+  const {offersNum, offers} = props;
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoutes.ROOT}>
-          <Main offersNum={offersNum} />
+          <Main offersNum={offersNum} offers={offers} />
         </Route>
         <Route exact path={AppRoutes.LOGIN}>
           <Login />
         </Route>
         <Route exact path={AppRoutes.FAVORITES}>
-          <Favorites />
+          <Favorites offers={offers} />
         </Route>
         <Route exact path={AppRoutes.ROOM}>
           <Offer />
@@ -35,6 +38,7 @@ function App({offersNum}) {
 
 App.propTypes = {
   offersNum: PropTypes.number,
+  offers: PropTypes.arrayOf(offerProp),
 };
 
 export default App;
