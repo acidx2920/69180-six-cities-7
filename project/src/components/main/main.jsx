@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Card from '../card/card';
+import Cards from '../cards/cards';
 import Logo from '../logo/logo';
+import offerProp from '../offer/offer.prop';
 
-function Main({offersNum}) {
+function Main(props) {
+  const {offersNum, offers} = props;
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -92,7 +95,7 @@ function Main({offersNum}) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {[{id:0}, {id:1}, {id:2}, {id:3}, {id:4}].map((item) => <Card key={item.id} />)}
+                <Cards offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
@@ -107,6 +110,7 @@ function Main({offersNum}) {
 
 Main.propTypes = {
   offersNum: PropTypes.number,
+  offers: PropTypes.arrayOf(offerProp),
 };
 
 export default Main;
