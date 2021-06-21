@@ -6,13 +6,13 @@ import offerProp from '../offer/offer.prop';
 
 function Cards(props) {
   // eslint-disable-next-line no-unused-vars
-  const [activeCard, setActiveCard] = useState('');
+  const [activeCard, setActiveCard] = useState({});
   const {offers} = props;
 
   return (
     <>
       {offers.map((offer) => (
-        <Card key={offer.id} offer={offer} onMouseOver={() => {setActiveCard(offer);}} />
+        <Card key={offer.id} offer={offer} onHover={(item) => setActiveCard(item)} />
       ))}
     </>
   );
