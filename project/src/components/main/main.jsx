@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 import Cards from '../cards/cards';
 import Logo from '../logo/logo';
+import Map from '../map/map';
 import offerProp from '../offer/offer.prop';
 
 function Main(props) {
   const {offersNum, offers} = props;
+  const points = offers.map((offer) => offer.location);
 
   return (
     <div className="page page--gray page--main">
@@ -99,7 +101,9 @@ function Main(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map points={points} city={offers[0].city} />
+              </section>
             </div>
           </div>
         </div>
