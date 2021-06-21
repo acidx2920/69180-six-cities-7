@@ -9,7 +9,7 @@ export default PropTypes.shape({
   images: PropTypes.arrayOf(PropTypes.string),
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
-  type: PropTypes.oneOf(Object.keys(OfferTypes)).isRequired,
+  type: PropTypes.oneOf(Object.values(OfferTypes)).isRequired,
   isFavorite: PropTypes.bool,
   isPremium: PropTypes.bool,
   city: PropTypes.shape({

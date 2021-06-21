@@ -6,8 +6,8 @@ export const AppRoutes = {
 };
 
 export const OfferTypes = {
-  apartment: 'Apartment',
-  room: 'Private Room',
-  house: 'House',
-  hotel: 'Hotel',
+  APARTMENT: 'Apartment',
+  ROOM: 'Private Room',
+  HOUSE: 'House',
+  HOTEL: 'Hotel',
 };

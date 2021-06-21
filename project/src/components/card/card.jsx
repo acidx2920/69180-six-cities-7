@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Link} from 'react-router-dom';
 import offerProp from '../offer/offer.prop';
 import { OfferTypes } from '../../consts';
 
 function Card(props) {
-  const {offer} = props;
+  const {offer, onHover} = props;
   const {id, previewImage, isFavorite, isPremium, price, rating, title, type} = offer;
 
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseEnter={() => onHover(offer)}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -42,7 +43,7 @@ function Card(props) {
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{OfferTypes[type]}</p>
+        <p className="place-card__type">{OfferTypes[type.toUpperCase()]}</p>
       </div>
     </article>
   );
@@ -50,6 +51,7 @@ function Card(props) {
 
 Card.propTypes = {
   offer: offerProp,
+  onHover: PropTypes.func,
 };
 
 export default Card;
