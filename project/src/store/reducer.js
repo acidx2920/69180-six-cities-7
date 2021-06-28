@@ -1,9 +1,10 @@
-import {ActionType} from './actions';
+import {ActionType} from './action';
 import offers from '../mocks/offers';
+import {DEFAULT_CITY} from '../consts';
 
 const initialState = {
-  city: 'Paris',
   offers,
+  activeCity: DEFAULT_CITY,
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,7 +12,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return {
         ...state,
-        city: action.payload,
+        activeCity: action.payload,
       };
     case ActionType.GET_OFFERS:
       return {

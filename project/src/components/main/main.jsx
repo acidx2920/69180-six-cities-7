@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Cards from '../cards/cards';
@@ -7,9 +8,13 @@ import Map from '../map/map';
 import Cities from '../cities/cities';
 import offerProp from '../offer/offer.prop';
 
+const getOffersByCity = (offers, city) => (
+  offers.filter((offer) => offer.city.name === city)
+);
+
 function Main(props) {
   const [activeOffer, setActiveOffer] = useState(null);
-  const {offers} = props;
+  const {offers, activeCity} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -46,7 +51,7 @@ function Main(props) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in {activeCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -80,6 +85,12 @@ function Main(props) {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerProp),
+  activeCity: PropTypes.string.isRequired,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  offers: getOffersByCity(state.offers, state.activeCity),
+  activeCity: state.activeCity,
+});
+
+export default connect(mapStateToProps)(Main);
