@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Card from '../card/card';
 import offerProp from '../offer/offer.prop';
 
 function Cards(props) {
-  // eslint-disable-next-line no-unused-vars
-  const [activeCard, setActiveCard] = useState({});
-  const {offers} = props;
+  const {offers, activeOffer, setActiveOffer} = props;
 
   return (
     <>
       {offers.map((offer) => (
-        <Card key={offer.id} offer={offer} onHover={(item) => setActiveCard(item)} />
+        <Card
+          key={offer.id}
+          offer={offer}
+          isActive={offer.id === activeOffer?.id}
+          handleMouseEnter={() => setActiveOffer(offer)}
+          handleMouseLeave={() => setActiveOffer(null)}
+        />
       ))}
     </>
   );
@@ -20,6 +24,8 @@ function Cards(props) {
 
 Cards.propTypes = {
   offers: PropTypes.arrayOf(offerProp),
+  activeOffer: offerProp,
+  setActiveOffer: PropTypes.func,
 };
 
 export default Cards;

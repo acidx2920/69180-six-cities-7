@@ -36,4 +36,4 @@ export default PropTypes.shape({
     avatarUrl: PropTypes.string,
     isPremium: PropTypes.bool,
   }).isRequired,
-}).isRequired;
+});

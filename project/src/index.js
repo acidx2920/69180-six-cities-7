@@ -7,10 +7,6 @@ import App from './components/app/app';
 import offers from './mocks/offers';
 import {reducer} from './store/reducer';
 
-const config = {
-  offersNum: 312,
-};
-
 const store = createStore(
   reducer,
   composeWithDevTools(),
@@ -20,7 +16,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App
-        offersNum={config.offersNum}
         offers={offers}
       />
     </Provider>

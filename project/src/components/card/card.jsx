@@ -6,11 +6,11 @@ import offerProp from '../offer/offer.prop';
 import { OfferTypes } from '../../consts';
 
 function Card(props) {
-  const {offer, onHover} = props;
+  const {offer, isActive, handleMouseEnter, handleMouseLeave} = props;
   const {id, previewImage, isFavorite, isPremium, price, rating, title, type} = offer;
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={() => onHover(offer)}>
+    <article className={`cities__place-card place-card${isActive ? ' place-card--active' : ''}`} onMouseEnter={() => handleMouseEnter(offer)} onMouseLeave={ handleMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -50,8 +50,10 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  offer: offerProp,
-  onHover: PropTypes.func,
+  offer: offerProp.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  handleMouseEnter: PropTypes.func.isRequired,
+  handleMouseLeave: PropTypes.func.isRequired,
 };
 
 export default Card;
