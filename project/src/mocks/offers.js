@@ -12,15 +12,15 @@ const offers = [
     isPremium: true,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.858548,
+        longitude: 2.317527,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     },
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.858548,
+      longitude: 2.317527,
       zoom: 8,
     },
     maxAdults: 4,

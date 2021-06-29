@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import {OfferTypes} from '../../consts';
 
+const types = Object.keys(OfferTypes).map((item) => item.toLowerCase());
+
 export default PropTypes.shape({
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
@@ -9,7 +11,7 @@ export default PropTypes.shape({
   images: PropTypes.arrayOf(PropTypes.string),
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
-  type: PropTypes.oneOf(Object.values(OfferTypes)).isRequired,
+  type: PropTypes.oneOf(types).isRequired,
   isFavorite: PropTypes.bool,
   isPremium: PropTypes.bool,
   city: PropTypes.shape({
@@ -34,4 +36,4 @@ export default PropTypes.shape({
     avatarUrl: PropTypes.string,
     isPremium: PropTypes.bool,
   }).isRequired,
-}).isRequired;
+});
