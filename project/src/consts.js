@@ -1,8 +1,19 @@
-export const AppRoutes = {
+export const AppRoute = {
   FAVORITES: '/favorites',
   LOGIN: '/login',
   ROOM: '/offer/:id',
   ROOT: '/',
+};
+
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+};
+
+export const APIRoute = {
+  OFFERS: '/hotels',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
 };
 
 export const OfferTypes = {
