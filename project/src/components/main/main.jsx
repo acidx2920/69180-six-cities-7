@@ -69,4 +69,6 @@ const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
 });
 
+export {Main};
+
 export default connect(mapStateToProps)(Main);
