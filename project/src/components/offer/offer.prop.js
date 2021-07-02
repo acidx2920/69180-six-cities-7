@@ -31,9 +31,9 @@ export default PropTypes.shape({
   bedrooms: PropTypes.number.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string),
   host: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
     avatarUrl: PropTypes.string,
-    isPremium: PropTypes.bool,
-  }).isRequired,
+    isPro: PropTypes.bool,
+  }),
 });

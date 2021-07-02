@@ -1,6 +1,8 @@
 export const ActionType = {
-  CHANGE_CITY: 'data/changeCity',
+  CHANGE_CITY: 'offers/changeCity',
   GET_OFFERS: 'data/getOffers',
+  REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
+  LOGOUT: 'user/logout',
 };
 
 export const ActionCreator = {
@@ -11,5 +13,12 @@ export const ActionCreator = {
   getOffers: (offers) => ({
     type: ActionType.GET_OFFERS,
     payload: offers,
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+  logout: () => ({
+    type: ActionType.LOGOUT,
   }),
 };
