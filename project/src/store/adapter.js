@@ -20,3 +20,16 @@ export const adaptOffers = (offer) => {
 
   return adapted;
 };
+
+export const adaptAuthInfo = (info) => {
+  const adapted = {
+    ...info,
+    avatarUrl: info.avatar_url,
+    isPro: info.is_pro,
+  };
+
+  delete adapted.avatar_url;
+  delete adapted.is_pro;
+
+  return adapted;
+};

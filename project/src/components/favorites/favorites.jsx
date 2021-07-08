@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {Link} from 'react-router-dom';
@@ -8,6 +9,7 @@ import { OfferTypes } from '../../consts';
 
 function Favorites(props) {
   const {offers} = props;
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <div className="page">
@@ -26,7 +28,7 @@ function Favorites(props) {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {offers.map((offer) => (
+                  {favoriteOffers.map((offer) => (
                     <article className="favorites__card place-card" key={offer.id}>
                       <div className="favorites__image-wrapper place-card__image-wrapper">
                         <Link to={`/offer/${offer.id}`}>
@@ -78,4 +80,10 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(offerProp),
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {Favorites};
+
+export default connect(mapStateToProps, null)(Favorites);
