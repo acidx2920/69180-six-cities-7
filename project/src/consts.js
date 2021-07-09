@@ -23,6 +23,17 @@ export const OfferTypes = {
   HOTEL: 'Hotel',
 };
 
+export const CardTypes = {
+  MAIN: {
+    articleClass: 'cities__place-card',
+    imageClass: 'cities__image-wrapper',
+  },
+  NEAR: {
+    articleClass: 'near-places__card',
+    imageClass: 'near-places__image-wrapper',
+  },
+};
+
 export const CITIES = [
   'Paris',
   'Cologne',
