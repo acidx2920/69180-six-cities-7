@@ -5,7 +5,12 @@ import Card from '../card/card';
 import offerProp from '../offer/offer.prop';
 
 function Cards(props) {
-  const {offers, activeOffer, setActiveOffer} = props;
+  const {
+    offers,
+    type,
+    activeOffer,
+    setActiveOffer,
+  } = props;
 
   return (
     <>
@@ -13,9 +18,22 @@ function Cards(props) {
         <Card
           key={offer.id}
           offer={offer}
+          type={type}
           isActive={offer.id === activeOffer?.id}
-          handleMouseEnter={() => setActiveOffer(offer)}
-          handleMouseLeave={() => setActiveOffer(null)}
+          handleMouseEnter={
+            () => {
+              if(type === 'MAIN') {
+                setActiveOffer(offer);
+              }
+            }
+          }
+          handleMouseLeave={
+            () => {
+              if(type === 'MAIN') {
+                setActiveOffer(null);
+              }
+            }
+          }
         />
       ))}
     </>
@@ -23,6 +41,7 @@ function Cards(props) {
 }
 
 Cards.propTypes = {
+  type: PropTypes.string,
   offers: PropTypes.arrayOf(offerProp),
   activeOffer: offerProp,
   setActiveOffer: PropTypes.func,

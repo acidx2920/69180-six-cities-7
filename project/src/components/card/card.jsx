@@ -3,20 +3,35 @@ import PropTypes from 'prop-types';
 
 import {Link} from 'react-router-dom';
 import offerProp from '../offer/offer.prop';
-import { OfferTypes } from '../../consts';
+import { OfferTypes, CardTypes } from '../../consts';
 
 function Card(props) {
-  const {offer, isActive, handleMouseEnter, handleMouseLeave} = props;
-  const {id, previewImage, isFavorite, isPremium, price, rating, title, type} = offer;
+  const {
+    offer,
+    type: cardType,
+    isActive,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = props;
+  const {
+    id,
+    previewImage,
+    isFavorite,
+    isPremium,
+    price,
+    rating,
+    title,
+    type,
+  } = offer;
 
   return (
-    <article className={`cities__place-card place-card${isActive ? ' place-card--active' : ''}`} onMouseEnter={() => handleMouseEnter(offer)} onMouseLeave={ handleMouseLeave}>
+    <article className={`${CardTypes[cardType].articleClass} place-card${isActive ? ' place-card--active' : ''}`} onMouseEnter={() => handleMouseEnter(offer)} onMouseLeave={handleMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${CardTypes[cardType].imageClass} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
@@ -50,6 +65,7 @@ function Card(props) {
 }
 
 Card.propTypes = {
+  type: PropTypes.string,
   offer: offerProp.isRequired,
   isActive: PropTypes.bool.isRequired,
   handleMouseEnter: PropTypes.func.isRequired,

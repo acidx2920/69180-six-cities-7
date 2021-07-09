@@ -44,7 +44,7 @@ function Main(props) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Cards offers={offers} activeOffer={activeOffer} setActiveOffer={setActiveOffer} />
+                <Cards type="MAIN" offers={offers} activeOffer={activeOffer} setActiveOffer={setActiveOffer} />
               </div>
             </section>
             <div className="cities__right-section">
