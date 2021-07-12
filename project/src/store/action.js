@@ -1,6 +1,7 @@
 export const ActionType = {
   CHANGE_CITY: 'app/changeCity',
   GET_OFFERS: 'data/getOffers',
+  CHANGE_SORTING: 'app/changeSorting',
   REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   SET_AUTHORIZATION_INFO: 'user/setAuthorizationInfo',
   LOGOUT: 'user/logout',
@@ -15,6 +16,10 @@ export const ActionCreator = {
   getOffers: (offers) => ({
     type: ActionType.GET_OFFERS,
     payload: offers,
+  }),
+  changeSorting: (sortingType) => ({
+    type: ActionType.CHANGE_SORTING,
+    payload: sortingType,
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRE_AUTHORIZATION,

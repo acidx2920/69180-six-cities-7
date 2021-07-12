@@ -40,7 +40,35 @@ function Offer(props) {
         'name': 'Max',
       },
     },
+    {
+      'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+      'date': '2020-05-08T14:13:56.569Z',
+      'id': 2,
+      'rating': 4,
+      'user': {
+        'avatarUrl': 'img/avatar-angelina.jpg',
+        'id': 4,
+        'isPro': false,
+        'name': 'Max',
+      },
+    },
+    {
+      'comment': '3',
+      'date': '2019-05-08T14:13:56.57Z',
+      'id': 3,
+      'rating': 4,
+      'user': {
+        'avatarUrl': 'img/avatar-angelina.jpg',
+        'id': 4,
+        'isPro': false,
+        'name': 'Max',
+      },
+    },
   ];
+
+  const reviewsPrepared = reviews
+    .sort((reviewPrev, reviewNext) => new Date(reviewNext.date) - new Date(reviewPrev.date))
+    .slice(0, 10);
 
   return (
     <div className="page">
@@ -120,11 +148,11 @@ function Offer(props) {
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <Reviews reviews={reviews} />
+              <Reviews reviews={reviewsPrepared} />
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers.slice(0, 3)} />
+            <Map offers={offers.slice(0, 3)} activeOffer={offer} />
           </section>
         </section>
         <div className="container">

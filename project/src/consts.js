@@ -34,6 +34,13 @@ export const CardTypes = {
   },
 };
 
+export const SortingTypes = {
+  POPULAR: 'Popular',
+  PRICE_LOW: 'Price: low to high',
+  PRICE_HIGH: 'Price: high to low',
+  RATING: 'Top rated first',
+};
+
 export const CITIES = [
   'Paris',
   'Cologne',
@@ -44,5 +51,6 @@ export const CITIES = [
 ];
 
 export const DEFAULT_CITY = 'Paris';
+export const DEFAULT_SORTING = SortingTypes.POPULAR;
 export const ACTIVE_MARKER_URL = 'img/pin-active.svg';
 export const DEFAULT_MARKER_URL = 'img/pin.svg';
