@@ -1,8 +1,9 @@
 export const AppRoute = {
   FAVORITES: '/favorites',
   LOGIN: '/login',
-  ROOM: '/offer/:id',
+  OFFER: '/offer/:id',
   ROOT: '/',
+  NOT_FOUND: '/404',
 };
 
 export const AuthorizationStatus = {
@@ -12,6 +13,7 @@ export const AuthorizationStatus = {
 
 export const APIRoute = {
   OFFERS: '/hotels',
+  REVIEWS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
 };

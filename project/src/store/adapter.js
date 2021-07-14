@@ -1,7 +1,8 @@
-export const adaptOffers = (offer) => {
+export const adaptOffer = (offer) => {
   const adapted = {
     ...offer,
     host: {
+      ...offer.host,
       avatarUrl: offer.host.avatar_url,
       isPro: offer.host.is_pro,
     },
@@ -30,6 +31,22 @@ export const adaptAuthInfo = (info) => {
 
   delete adapted.avatar_url;
   delete adapted.is_pro;
+
+  return adapted;
+};
+
+export const adaptReview = (review) => {
+  const adapted = {
+    ...review,
+    user: {
+      ...review.user,
+      avatarUrl: review.user.avatar_url,
+      isPro: review.user.is_pro,
+    },
+  };
+
+  delete adapted.user.avatar_url;
+  delete adapted.user.is_pro;
 
   return adapted;
 };

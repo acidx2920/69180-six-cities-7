@@ -58,7 +58,7 @@ function Card(props) {
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{OfferTypes[type.toUpperCase()]}</p>
+        <p className="place-card__type">{OfferTypes[type?.toUpperCase()]}</p>
       </div>
     </article>
   );

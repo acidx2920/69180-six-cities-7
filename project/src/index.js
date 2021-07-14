@@ -8,7 +8,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import App from './components/app/app';
 import {reducer} from './store/reducer';
 import {ActionCreator} from './store/action';
-import {checkAuth} from './store/api-actions';
 import {AuthorizationStatus} from './consts';
 import {redirect} from './store/middlewares/redirect';
 
@@ -24,12 +23,10 @@ const store = createStore(
   ),
 );
 
-store.dispatch(checkAuth()).then(() => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>,
-    document.getElementById('root'));
-});
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root'));
