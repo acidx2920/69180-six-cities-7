@@ -17,7 +17,7 @@ function RadioButton(props) {
 }
 
 RadioButton.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   title: PropTypes.string,
   checked: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,

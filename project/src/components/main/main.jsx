@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {fetchOffers} from '../../store/api-actions';
 
 import Header from '../header/header';
 import Cards from '../cards/cards';
 import Map from '../map/map';
 import Cities from '../cities/cities';
 import Sorting from '../sorting/sorting';
+import Loader from '../loader/loader';
 import offerProp from '../offer/offer.prop';
 import {SortingTypes} from '../../consts';
 
@@ -28,8 +30,18 @@ const sortOffers = (offers, sortingType) => {
 };
 
 function Main(props) {
+  const {offers, activeCity, isDataLoaded, onPageLoad} = props;
   const [activeOffer, setActiveOffer] = useState(null);
-  const {offers, activeCity} = props;
+
+  useEffect(() => {
+    onPageLoad();
+  }, [onPageLoad]);
+
+  if (!isDataLoaded) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -63,13 +75,22 @@ function Main(props) {
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerProp),
   activeCity: PropTypes.string.isRequired,
+  onPageLoad: PropTypes.func.isRequired,
+  isDataLoaded: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   offers: sortOffers(getOffersByCity(state.offers, state.activeCity), state.activeSorting),
   activeCity: state.activeCity,
+  isDataLoaded: state.isDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onPageLoad() {
+    dispatch(fetchOffers());
+  },
 });
 
 export {Main};
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

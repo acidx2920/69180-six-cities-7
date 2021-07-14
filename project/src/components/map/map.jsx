@@ -19,7 +19,7 @@ const iconActive = leaflet.icon({
 
 function Map(props) {
   const {offers, activeOffer} = props;
-  const city = activeOffer?.city.location || offers[0].city.location;
+  const city = activeOffer?.city?.location || offers[0]?.city?.location;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   useEffect(() => {

@@ -3,6 +3,9 @@ import {DEFAULT_CITY, DEFAULT_SORTING, AuthorizationStatus} from '../consts';
 
 const initialState = {
   offers: [],
+  offer: {},
+  nearbyOffers: [],
+  reviews: [],
   activeCity: DEFAULT_CITY,
   activeSorting: DEFAULT_SORTING,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -17,11 +20,32 @@ const reducer = (state = initialState, action) => {
         ...state,
         activeCity: action.payload,
       };
+    case ActionType.SET_LOADED_STATUS:
+      return {
+        ...state,
+        isDataLoaded: action.payload,
+      };
     case ActionType.GET_OFFERS:
       return {
         ...state,
         offers: action.payload,
         isDataLoaded: true,
+      };
+    case ActionType.GET_OFFER:
+      return {
+        ...state,
+        offer: action.payload,
+        isDataLoaded: true,
+      };
+    case ActionType.GET_NEARBY_OFFERS:
+      return {
+        ...state,
+        nearbyOffers: action.payload,
+      };
+    case ActionType.GET_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
       };
     case ActionType.CHANGE_SORTING:
       return {
