@@ -1,14 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
 
 import {Link} from 'react-router-dom';
 import Header from '../header/header';
-import offerProp from '../offer/offer.prop';
-import { OfferTypes } from '../../consts';
+import {OfferTypes} from '../../consts';
+import {getOffers} from '../../store/data/selectors';
 
-function Favorites(props) {
-  const {offers} = props;
+function Favorites() {
+  const offers = useSelector(getOffers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
@@ -76,14 +75,4 @@ function Favorites(props) {
   );
 }
 
-Favorites.propTypes = {
-  offers: PropTypes.arrayOf(offerProp),
-};
-
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-});
-
-export {Favorites};
-
-export default connect(mapStateToProps, null)(Favorites);
+export default Favorites;

@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import React, {useEffect, useCallback} from 'react';
+import {useDispatch} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {initializeApp} from '../../store/api-actions';
 import {AppRoute} from '../../consts';
@@ -13,8 +12,13 @@ import Page404 from '../page-404/page-404';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 
-function App(props) {
-  const {onAppLoad} = props;
+function App() {
+
+  const dispatch = useDispatch();
+
+  const onAppLoad = useCallback(() => {
+    dispatch(initializeApp());
+  }, [dispatch]);
 
   useEffect(() => {
     onAppLoad();
@@ -37,16 +41,4 @@ function App(props) {
   );
 }
 
-App.propTypes = {
-  onAppLoad: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onAppLoad() {
-    dispatch(initializeApp());
-  },
-});
-
-export {App};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

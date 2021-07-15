@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useSelector, useDispatch} from 'react-redux';
 import {OfferTypes} from '../../consts';
 import {fetchOffer} from '../../store/api-actions';
 
@@ -10,11 +9,22 @@ import Reviews from '../reviews/reviews';
 import Map from '../map/map';
 import Cards from '../cards/cards';
 import Loader from '../loader/loader';
-import offerProp from '../offer/offer.prop';
-import reviewProp from '../review/review.prop';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getOffer, getNearbyOffers, getReviews, getIsDataLoaded} from '../../store/data/selectors';
 
-function Offer({offer, nearbyOffers, reviews, isDataLoaded, onPageLoad, authorizationStatus}) {
+function Offer() {
   const {id} = useParams();
+
+  const offer = useSelector(getOffer);
+  const nearbyOffers = useSelector(getNearbyOffers);
+  const reviews = useSelector(getReviews);
+  const isDataLoaded = useSelector(getIsDataLoaded);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
+  const dispatch = useDispatch();
+  const onPageLoad = useCallback((offerId) => {
+    dispatch(fetchOffer(offerId));
+  }, [dispatch]);
 
   useEffect(() => {
     onPageLoad(id);
@@ -22,7 +32,6 @@ function Offer({offer, nearbyOffers, reviews, isDataLoaded, onPageLoad, authoriz
   }, [id, onPageLoad]);
 
   const {
-    id: offerId,
     title,
     description,
     rating,
@@ -120,7 +129,7 @@ function Offer({offer, nearbyOffers, reviews, isDataLoaded, onPageLoad, authoriz
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <Reviews reviews={reviews} id={offerId} authorizationStatus={authorizationStatus} />
+              <Reviews reviews={reviews} id={+id} authorizationStatus={authorizationStatus} />
             </div>
           </div>
           <section className="property__map map">
@@ -140,29 +149,4 @@ function Offer({offer, nearbyOffers, reviews, isDataLoaded, onPageLoad, authoriz
   );
 }
 
-Offer.propTypes = {
-  offer: offerProp,
-  nearbyOffers: PropTypes.arrayOf(offerProp),
-  reviews: PropTypes.arrayOf(reviewProp),
-  onPageLoad: PropTypes.func,
-  isDataLoaded: PropTypes.bool,
-  authorizationStatus: PropTypes.string,
-};
-
-const mapStateToProps = (state) => ({
-  offer: state.offer,
-  nearbyOffers: state.nearbyOffers,
-  reviews: state.reviews,
-  isDataLoaded: state.isDataLoaded,
-  authorizationStatus: state.authorizationStatus,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onPageLoad(id) {
-    dispatch(fetchOffer(id));
-  },
-});
-
-export {Offer};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Offer);
+export default Offer;

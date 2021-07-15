@@ -1,11 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {ActionCreator} from '../../store/action';
-import {connect} from 'react-redux';
+import {changeCity} from '../../store/action';
+import {useSelector, useDispatch} from 'react-redux';
 import {CITIES} from '../../consts';
+import {getActiveCity} from '../../store/offers/selectors';
 
-function Cities(props) {
-  const {activeCity, onCityClick} = props;
+function Cities() {
+  const activeCity = useSelector(getActiveCity);
+
+  const dispatch = useDispatch();
+  const onCityClick = (city) => {
+    dispatch(changeCity(city));
+  };
 
   return (
     <div className="tabs">
@@ -31,21 +36,4 @@ function Cities(props) {
   );
 }
 
-Cities.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-  onCityClick: PropTypes.func,
-};
-
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onCityClick(selectedCity) {
-    dispatch(ActionCreator.changeCity(selectedCity));
-  },
-});
-
-export {Cities};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cities);
+export default Cities;

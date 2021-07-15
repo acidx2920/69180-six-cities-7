@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import React, {useState, useEffect, useCallback} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {fetchOffers} from '../../store/api-actions';
 
 import Header from '../header/header';
@@ -9,8 +8,9 @@ import Map from '../map/map';
 import Cities from '../cities/cities';
 import Sorting from '../sorting/sorting';
 import Loader from '../loader/loader';
-import offerProp from '../offer/offer.prop';
 import {SortingTypes} from '../../consts';
+import {getOffers, getIsDataLoaded} from '../../store/data/selectors';
+import {getActiveSorting, getActiveCity} from '../../store/offers/selectors';
 
 const getOffersByCity = (offers, city) => (
   offers.filter((offer) => offer.city.name === city)
@@ -29,13 +29,24 @@ const sortOffers = (offers, sortingType) => {
   }
 };
 
-function Main(props) {
-  const {offers, activeCity, isDataLoaded, onPageLoad} = props;
+function Main() {
+  const activeCity = useSelector(getActiveCity);
+  const isDataLoaded = useSelector(getIsDataLoaded);
+  const offers = useSelector(getOffers);
+  const activeSorting = useSelector(getActiveSorting);
+
   const [activeOffer, setActiveOffer] = useState(null);
+
+  const dispatch = useDispatch();
+  const onPageLoad = useCallback(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
 
   useEffect(() => {
     onPageLoad();
   }, [onPageLoad]);
+
+  const offersPrepared = sortOffers(getOffersByCity(offers, activeCity), activeSorting);
 
   if (!isDataLoaded) {
     return (
@@ -54,15 +65,15 @@ function Main(props) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+              <b className="places__found">{offersPrepared.length} places to stay in {activeCity}</b>
               <Sorting />
               <div className="cities__places-list places__list tabs__content">
-                <Cards type="MAIN" offers={offers} activeOffer={activeOffer} setActiveOffer={setActiveOffer} />
+                <Cards type="MAIN" offers={offersPrepared} activeOffer={activeOffer} setActiveOffer={setActiveOffer} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} activeOffer={activeOffer} />
+                <Map offers={offersPrepared} activeOffer={activeOffer} />
               </section>
             </div>
           </div>
@@ -72,25 +83,4 @@ function Main(props) {
   );
 }
 
-Main.propTypes = {
-  offers: PropTypes.arrayOf(offerProp),
-  activeCity: PropTypes.string.isRequired,
-  onPageLoad: PropTypes.func.isRequired,
-  isDataLoaded: PropTypes.bool,
-};
-
-const mapStateToProps = (state) => ({
-  offers: sortOffers(getOffersByCity(state.offers, state.activeCity), state.activeSorting),
-  activeCity: state.activeCity,
-  isDataLoaded: state.isDataLoaded,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onPageLoad() {
-    dispatch(fetchOffers());
-  },
-});
-
-export {Main};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;
