@@ -1,15 +1,24 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 import {postComment} from '../../store/api-actions';
 
 import RadioButton from '../radio-button/radio-button';
 
-function CommentForm({id, onFormSubmit}) {
+function CommentForm({id}) {
   const [formData, setFormData] = useState({
     rating: 0,
     comment: '',
   });
+
+  const dispatch = useDispatch();
+  const onFormSubmit = (offerId, formComment, formRating) => {
+    dispatch(postComment({
+      id: offerId,
+      comment: formComment,
+      rating: formRating,
+    }));
+  };
 
   const {rating, comment} = formData;
 
@@ -65,19 +74,6 @@ function CommentForm({id, onFormSubmit}) {
 
 CommentForm.propTypes = {
   id: PropTypes.number,
-  onFormSubmit: PropTypes.func,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onFormSubmit(id, comment, rating) {
-    dispatch(postComment({
-      id,
-      comment,
-      rating,
-    }));
-  },
-});
-
-export {CommentForm};
-
-export default connect(null, mapDispatchToProps)(CommentForm);
+export default CommentForm;

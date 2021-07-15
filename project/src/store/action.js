@@ -1,64 +1,62 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
-  CHANGE_CITY: 'app/changeCity',
   SET_LOADED_STATUS: 'data/setLoadedStatus',
   GET_OFFERS: 'data/getOffers',
   GET_OFFER: 'data/getOffer',
   GET_NEARBY_OFFERS: 'data/getNearbyOffers',
   GET_REVIEWS: 'data/getReviews',
-  ADD_REVIEW: 'app/addReview',
-  CHANGE_SORTING: 'app/changeSorting',
+  CHANGE_CITY: 'offers/changeCity',
+  ADD_REVIEW: 'offers/addReview',
+  CHANGE_SORTING: 'offers/changeSorting',
+  REDIRECT_TO_ROUTE: 'offers/redirectToRoute',
   REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   SET_AUTHORIZATION_INFO: 'user/setAuthorizationInfo',
   LOGOUT: 'user/logout',
-  REDIRECT_TO_ROUTE: 'app/redirectToRoute',
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  setLoadedStatus: (status) => ({
-    type: ActionType.SET_LOADED_STATUS,
-    payload: status,
-  }),
-  getOffers: (offers) => ({
-    type: ActionType.GET_OFFERS,
-    payload: offers,
-  }),
-  getOffer: (offer) => ({
-    type: ActionType.GET_OFFER,
-    payload: offer,
-  }),
-  getNearbyOffers: (offers) => ({
-    type: ActionType.GET_NEARBY_OFFERS,
-    payload: offers,
-  }),
-  getReviews: (reviews) => ({
-    type: ActionType.GET_REVIEWS,
-    payload: reviews,
-  }),
-  addReview: (review) => ({
-    type: ActionType.ADD_REVIEW,
-    payload: review,
-  }),
-  changeSorting: (sortingType) => ({
-    type: ActionType.CHANGE_SORTING,
-    payload: sortingType,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRE_AUTHORIZATION,
-    payload: status,
-  }),
-  setAuthorizationInfo: (info) => ({
-    type: ActionType.SET_AUTHORIZATION_INFO,
-    payload: info,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-};
+export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
+  payload: city,
+}));
+
+export const setLoadedStatus = createAction(ActionType.SET_LOADED_STATUS, (status) => ({
+  payload: status,
+}));
+
+export const getOffers = createAction(ActionType.GET_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+export const getOffer = createAction(ActionType.GET_OFFER, (offer) => ({
+  payload: offer,
+}));
+
+export const getNearbyOffers = createAction(ActionType.GET_NEARBY_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+export const getReviews = createAction(ActionType.GET_REVIEWS, (reviews) => ({
+  payload: reviews,
+}));
+
+export const addReview = createAction(ActionType.ADD_REVIEW, (review) => ({
+  payload: review,
+}));
+
+export const changeSorting = createAction(ActionType.CHANGE_SORTING, (sortingType) => ({
+  payload: sortingType,
+}));
+
+export const requireAuthorization = createAction(ActionType.REQUIRE_AUTHORIZATION, (status) => ({
+  payload: status,
+}));
+
+export const setAuthorizationInfo = createAction(ActionType.SET_AUTHORIZATION_INFO, (info) => ({
+  payload: info,
+}));
+
+export const logout = createAction(ActionType.LOGOUT);
+
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
+  payload: url,
+}));

@@ -10,6 +10,7 @@ function Reviews(props) {
   const {reviews, id, authorizationStatus} = props;
 
   const reviewsPrepared = reviews
+    .slice()
     .sort((reviewPrev, reviewNext) => new Date(reviewNext.date) - new Date(reviewPrev.date))
     .slice(0, 10);
 
