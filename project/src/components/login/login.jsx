@@ -1,17 +1,38 @@
-import React, {useRef} from 'react';
-import {useDispatch} from 'react-redux';
+import React, {useEffect, useRef, useCallback} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {login} from '../../store/api-actions';
+import {redirectToRoute} from '../../store/action';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {AppRoute, AuthorizationStatus} from '../../consts';
 
 import Header from '../header/header';
 
 function Login() {
-  const dispatch = useDispatch();
-  const onFormSubmit = (authData) => {
-    dispatch(login(authData));
-  };
-
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const loginRef = useRef();
   const passwordRef = useRef();
+
+  const dispatch = useDispatch();
+  const onPageLoad = useCallback(() => {
+    if(authorizationStatus === AuthorizationStatus.AUTH) {
+      dispatch(redirectToRoute(AppRoute.ROOT));
+    }
+  }, [dispatch, authorizationStatus]);
+
+  useEffect(() => {
+    onPageLoad();
+  }, [onPageLoad]);
+
+  const onFormSubmit = (loginValue, passwordValue) => {
+    const loginTrimmed = loginValue.trim();
+    const passwordTrimmed = passwordValue.trim();
+    if(loginTrimmed && passwordTrimmed) {
+      dispatch(login({
+        login: loginTrimmed,
+        password: passwordTrimmed,
+      }));
+    }
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -27,10 +48,7 @@ function Login() {
               method="post"
               onSubmit={(evt) => {
                 evt.preventDefault();
-                onFormSubmit({
-                  login: loginRef.current.value,
-                  password: passwordRef.current.value,
-                });
+                onFormSubmit(loginRef.current.value, passwordRef.current.value);
               }}
             >
               <div className="login__input-wrapper form__input-wrapper">

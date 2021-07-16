@@ -8,6 +8,7 @@ import Map from '../map/map';
 import Cities from '../cities/cities';
 import Sorting from '../sorting/sorting';
 import Loader from '../loader/loader';
+import MainEmpty from '../main-empty/main-empty';
 import {SortingTypes} from '../../consts';
 import {getOffers, getIsDataLoaded} from '../../store/data/selectors';
 import {getActiveSorting, getActiveCity} from '../../store/offers/selectors';
@@ -52,6 +53,10 @@ function Main() {
     return (
       <Loader />
     );
+  }
+
+  if(!offersPrepared.length) {
+    return <MainEmpty />;
   }
 
   return (
