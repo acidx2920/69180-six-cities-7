@@ -14,6 +14,7 @@ export const AuthorizationStatus = {
 export const APIRoute = {
   OFFERS: '/hotels',
   REVIEWS: '/comments',
+  FAVORITES: '/favorite',
   LOGIN: '/login',
   LOGOUT: '/logout',
 };
@@ -29,10 +30,23 @@ export const CardTypes = {
   MAIN: {
     articleClass: 'cities__place-card',
     imageClass: 'cities__image-wrapper',
+    imageWidth: '260',
+    imageHeight: '200',
+    infoClass: '',
   },
   NEAR: {
     articleClass: 'near-places__card',
     imageClass: 'near-places__image-wrapper',
+    imageWidth: '260',
+    imageHeight: '200',
+    infoClass: '',
+  },
+  FAVORITES: {
+    articleClass: 'favorites__card',
+    imageClass: 'favorites__image-wrapper',
+    imageWidth: '150',
+    imageHeight: '110',
+    infoClass: 'favorites__card-info',
   },
 };
 

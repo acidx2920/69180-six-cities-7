@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {Link} from 'react-router-dom';
+import ButtonFavorite from '../button-favorite/button-favorite';
 import offerProp from '../offer/offer.prop';
-import { OfferTypes, CardTypes } from '../../consts';
+import {OfferTypes, CardTypes} from '../../consts';
 
 function Card(props) {
   const {
@@ -13,6 +14,7 @@ function Card(props) {
     handleMouseEnter,
     handleMouseLeave,
   } = props;
+
   const {
     id,
     previewImage,
@@ -33,21 +35,16 @@ function Card(props) {
       )}
       <div className={`${CardTypes[cardType].imageClass} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
+          <img className="place-card__image" src={previewImage} width={CardTypes[cardType].imageWidth} height={CardTypes[cardType].imageHeight} alt="Place" />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${CardTypes[cardType].infoClass} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button${isFavorite ? ' place-card__bookmark-button--active' : ''} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <ButtonFavorite isFavorite={isFavorite} id={id} cardType={cardType} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

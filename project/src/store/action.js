@@ -6,6 +6,9 @@ export const ActionType = {
   GET_OFFER: 'data/getOffer',
   GET_NEARBY_OFFERS: 'data/getNearbyOffers',
   GET_REVIEWS: 'data/getReviews',
+  GET_FAVORITES: 'data/getFavorites',
+  UPDATE_OFFER: 'data/updateOffer',
+  REMOVE_FAVORITE: 'data/removeFavorite',
   CHANGE_CITY: 'offers/changeCity',
   ADD_REVIEW: 'offers/addReview',
   CHANGE_SORTING: 'offers/changeSorting',
@@ -39,6 +42,10 @@ export const getReviews = createAction(ActionType.GET_REVIEWS, (reviews) => ({
   payload: reviews,
 }));
 
+export const getFavorites = createAction(ActionType.GET_FAVORITES, (offers) => ({
+  payload: offers,
+}));
+
 export const addReview = createAction(ActionType.ADD_REVIEW, (review) => ({
   payload: review,
 }));
@@ -59,4 +66,12 @@ export const logout = createAction(ActionType.LOGOUT);
 
 export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
   payload: url,
+}));
+
+export const updateOffer = createAction(ActionType.UPDATE_OFFER, (offer) => ({
+  payload: offer,
+}));
+
+export const removeFavorite = createAction(ActionType.REMOVE_FAVORITE, (id) => ({
+  payload: id,
 }));

@@ -1,4 +1,4 @@
-import {getOffers, getOffer, getNearbyOffers, getReviews, setLoadedStatus, requireAuthorization, setAuthorizationInfo, redirectToRoute, logout as closeSession} from './action';
+import {getOffers, getOffer, getNearbyOffers, getReviews, setLoadedStatus, requireAuthorization, setAuthorizationInfo, redirectToRoute, logout as closeSession, getFavorites, updateOffer} from './action';
 import {AuthorizationStatus, AppRoute, APIRoute} from '../consts';
 import {adaptOffer, adaptReview} from './adapter';
 
@@ -22,6 +22,17 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => {
             .then(({data}) => dispatch(getReviews(data.map((review) => adaptReview(review)))));
         });
     });
+};
+
+export const fetchFavorites = () => (dispatch, _getState, api) => {
+  dispatch(setLoadedStatus(false));
+  api.get(APIRoute.FAVORITES)
+    .then(({data}) => dispatch(getFavorites(data.map((offer) => adaptOffer(offer)))));
+};
+
+export const toggleFavorite = (id, status) => (dispatch, _getState, api) => {
+  api.post(`${APIRoute.FAVORITES}/${id}/${status}`)
+    .then(({data}) => dispatch(updateOffer(adaptOffer(data))));
 };
 
 export const checkAuth = () => (dispatch, _getState, api) => (
