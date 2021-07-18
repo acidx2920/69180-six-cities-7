@@ -23,12 +23,13 @@ function Map(props) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   useEffect(() => {
+    let markers = [];
     if (map && city) {
       const {latitude, longitude, zoom} = city;
       map.setView({lat: latitude, lng: longitude}, zoom);
-      offers.forEach((offer) => {
+      markers = offers.map((offer) => {
         const icon = offer.id === activeOffer?.id ? iconActive : iconDefault;
-        leaflet
+        return leaflet
           .marker({
             lat: offer.location.latitude,
             lng: offer.location.longitude,
@@ -36,6 +37,11 @@ function Map(props) {
           .addTo(map);
       });
     }
+    return () => {
+      for (const marker of markers) {
+        marker.remove();
+      }
+    };
   }, [offers, activeOffer, city, map]);
 
   return <div id="map" style={{height: '100%'}} ref={mapRef} />;
