@@ -2,7 +2,7 @@ import React from 'react';
 
 function Loader() {
   return (
-    <p>Loading ...</p>
+    <p data-testid="loader">Loading ...</p>
   );
 }
 

@@ -6,7 +6,7 @@ import Footer from '../footer/footer';
 function FavoritesEmpty() {
 
   return (
-    <div className="page page--favorites-empty">
+    <div className="page page--favorites-empty" data-testid="favorites-empty">
       <Header />
 
       <main className="page__main page__main--favorites page__main--favorites-empty">

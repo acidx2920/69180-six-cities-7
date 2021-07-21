@@ -34,6 +34,7 @@ function Cards(props) {
               }
             }
           }
+          dataTestid="card-item"
         />
       ))}
     </>

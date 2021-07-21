@@ -56,7 +56,7 @@ function CommentForm({id}) {
   ];
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit} data-testid="comment-form">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {radioButtons.map((item) => <RadioButton key={item.value} value={item.value} title={item.title} checked={formData.rating === item.value} handleChange={handleRatingChange} /> )}

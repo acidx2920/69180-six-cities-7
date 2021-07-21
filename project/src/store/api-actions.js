@@ -4,36 +4,34 @@ import {adaptOffer, adaptReview} from './adapter';
 
 export const fetchOffers = () => (dispatch, _getState, api) => {
   dispatch(setLoadedStatus(false));
-  api.get(APIRoute.OFFERS)
+  return api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(getOffers(data.map((offer) => adaptOffer(offer)))));
 };
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => {
   dispatch(setLoadedStatus(false));
-  api.get(`${APIRoute.OFFERS}/${id}`)
+  return api.get(`${APIRoute.OFFERS}/${id}`)
     .then(
       ({data}) => dispatch(getOffer(adaptOffer(data))),
       () => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
-    .then(() => {
-      api.get(`${APIRoute.OFFERS}/${id}/nearby`)
-        .then(({data}) => dispatch(getNearbyOffers(data.map((offer) => adaptOffer(offer)))))
-        .then(() => {
-          api.get(`${APIRoute.REVIEWS}/${id}`)
-            .then(({data}) => dispatch(getReviews(data.map((review) => adaptReview(review)))));
-        });
-    });
+    .then(() => api.get(`${APIRoute.OFFERS}/${id}/nearby`)
+      .then(({data}) => dispatch(getNearbyOffers(data.map((offer) => adaptOffer(offer)))))
+      .then(() => api.get(`${APIRoute.REVIEWS}/${id}`)
+        .then(({data}) => dispatch(getReviews(data.map((review) => adaptReview(review))))),
+      ),
+    );
 };
 
 export const fetchFavorites = () => (dispatch, _getState, api) => {
   dispatch(setLoadedStatus(false));
-  api.get(APIRoute.FAVORITES)
+  return api.get(APIRoute.FAVORITES)
     .then(({data}) => dispatch(getFavorites(data.map((offer) => adaptOffer(offer)))));
 };
 
-export const toggleFavorite = (id, status) => (dispatch, _getState, api) => {
+export const toggleFavorite = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITES}/${id}/${status}`)
-    .then(({data}) => dispatch(updateOffer(adaptOffer(data))));
-};
+    .then(({data}) => dispatch(updateOffer(adaptOffer(data))))
+);
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
