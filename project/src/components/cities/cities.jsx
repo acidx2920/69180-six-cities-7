@@ -13,7 +13,7 @@ function Cities() {
   };
 
   return (
-    <div className="tabs">
+    <div className="tabs" data-testid="cities">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {CITIES.map((city) => (

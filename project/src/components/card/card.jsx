@@ -27,7 +27,12 @@ function Card(props) {
   } = offer;
 
   return (
-    <article className={`${CardTypes[cardType].articleClass} place-card${isActive ? ' place-card--active' : ''}`} onMouseEnter={() => handleMouseEnter(offer)} onMouseLeave={handleMouseLeave}>
+    <article
+      className={`${CardTypes[cardType].articleClass} place-card${isActive ? ' place-card--active' : ''}`}
+      onMouseEnter={() => handleMouseEnter(offer)}
+      onMouseLeave={handleMouseLeave}
+      data-testid="card"
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -62,7 +67,7 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
   offer: offerProp.isRequired,
   isActive: PropTypes.bool.isRequired,
   handleMouseEnter: PropTypes.func.isRequired,
