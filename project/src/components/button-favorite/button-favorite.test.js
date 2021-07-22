@@ -16,7 +16,7 @@ describe('Component: ButtonFavorite', () => {
           },
         })}
       >
-        <ButtonFavorite cardType="FAVORITES" isFavorite id={1} />
+        <ButtonFavorite cardType="MAIN"  type="SMALL" isFavorite id={1} />
       </Provider>,
     );
 

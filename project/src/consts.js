@@ -26,6 +26,19 @@ export const OfferTypes = {
   HOTEL: 'Hotel',
 };
 
+export const BookmarkButtonTypes = {
+  BIG: {
+    classPrefix: 'property',
+    width: 31,
+    height: 33,
+  },
+  SMALL: {
+    classPrefix: 'place-card',
+    width: 18,
+    height: 19,
+  },
+};
+
 export const CardTypes = {
   MAIN: {
     articleClass: 'cities__place-card',

@@ -52,7 +52,7 @@ function Favorites() {
                       </a>
                     </div>
                   </div>
-                  <div className="favorites__places">
+                  <div className="favorites__places" data-testid="favorites">
                     <Cards type="FAVORITES" offers={favoritesByCity(city)} />
                   </div>
                 </li>

@@ -26,7 +26,7 @@ describe('Component: Page404', () => {
       </Provider>,
     );
     const headerElement = screen.getByText('404 Not Found');
-    const linkElement = screen.getByText('Вернуться на главную');
+    const linkElement = screen.getByText('Back to main');
 
     expect(headerElement).toBeInTheDocument();
     expect(linkElement).toBeInTheDocument();

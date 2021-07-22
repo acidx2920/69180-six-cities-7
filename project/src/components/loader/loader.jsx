@@ -1,8 +1,12 @@
 import React from 'react';
 
+import './loader.css';
+
 function Loader() {
   return (
-    <p data-testid="loader">Loading ...</p>
+    <div className="loader" data-testid="loader">
+      <div className="circle" />
+    </div>
   );
 }
 

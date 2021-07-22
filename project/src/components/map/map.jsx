@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import {DEFAULT_MARKER_URL, ACTIVE_MARKER_URL} from '../../consts';
 import offerProp from '../offer/offer.prop';
 
@@ -44,7 +44,7 @@ function Map(props) {
     };
   }, [offers, activeOffer, city, map]);
 
-  return <div id="map" style={{height: '100%'}} ref={mapRef} />;
+  return <div id="map" style={{height: '100%'}} ref={mapRef} data-testid="map" />;
 }
 
 Map.propTypes = {

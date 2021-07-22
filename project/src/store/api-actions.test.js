@@ -66,22 +66,28 @@ describe('Async operations', () => {
     const dispatch = jest.fn();
     const checkAuthLoader = checkAuth();
 
+    Storage.prototype.setItem = jest.fn();
+
     apiMock
       .onGet(APIRoute.LOGIN)
-      .reply(200, [{fake: true}]);
+      .reply(200, {token: 'test-token'});
 
     return checkAuthLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
+
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_AUTHORIZATION_INFO,
-          payload: [{fake: true}],
+          payload: {token: 'test-token'},
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.REQUIRE_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });
+
+        expect(Storage.prototype.setItem).toHaveBeenCalledTimes(1);
+        expect(Storage.prototype.setItem).toHaveBeenNthCalledWith(1, 'token', 'test-token');
       });
   });
 
@@ -91,9 +97,11 @@ describe('Async operations', () => {
     const fakeUser = {login: 'test@test.ru', password: '123456'};
     const loginLoader = login(fakeUser);
 
+    Storage.prototype.setItem = jest.fn();
+
     apiMock
       .onPost(APIRoute.LOGIN)
-      .reply(200, [{fake: true}]);
+      .reply(200, {token: 'test-token'});
 
     return loginLoader(dispatch, () => {}, api)
       .then(() => {
@@ -101,7 +109,7 @@ describe('Async operations', () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_AUTHORIZATION_INFO,
-          payload: [{fake: true}],
+          payload: {token: 'test-token'},
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
@@ -113,6 +121,9 @@ describe('Async operations', () => {
           type: ActionType.REDIRECT_TO_ROUTE,
           payload: AppRoute.ROOT,
         });
+
+        expect(Storage.prototype.setItem).toHaveBeenCalledTimes(1);
+        expect(Storage.prototype.setItem).toHaveBeenNthCalledWith(1, 'token', 'test-token');
       });
   });
 
@@ -121,17 +132,21 @@ describe('Async operations', () => {
     const dispatch = jest.fn();
     const logoutLoader = logout();
 
+    Storage.prototype.removeItem = jest.fn();
+
     apiMock
       .onDelete(APIRoute.LOGOUT)
-      .reply(200, [{fake: true}]);
+      .reply(204, [{fake: true}]);
 
-    return logoutLoader(dispatch, () => {}, api)
+    return logoutLoader(dispatch, jest.fn(() => {}), api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
-
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOGOUT,
         });
+
+        expect(Storage.prototype.removeItem).toHaveBeenCalledTimes(1);
+        expect(Storage.prototype.removeItem).toHaveBeenNthCalledWith(1, 'token');
       });
   });
 
