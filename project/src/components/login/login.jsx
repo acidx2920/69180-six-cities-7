@@ -50,6 +50,7 @@ function Login() {
                 evt.preventDefault();
                 onFormSubmit(loginRef.current.value, passwordRef.current.value);
               }}
+              data-testid="login-form"
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>

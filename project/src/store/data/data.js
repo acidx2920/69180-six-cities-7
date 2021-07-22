@@ -34,6 +34,9 @@ const data = createReducer(initialState, (builder) => {
     .addCase(updateOffer, (state, action) => {
       state.offers = updateById(state.offers, action.payload);
       state.nearbyOffers = updateById(state.nearbyOffers, action.payload);
+      if(state.offer.id === action.payload.id) {
+        state.offer = action.payload;
+      }
     })
     .addCase(getNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;

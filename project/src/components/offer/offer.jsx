@@ -9,6 +9,7 @@ import Reviews from '../reviews/reviews';
 import Map from '../map/map';
 import Cards from '../cards/cards';
 import Loader from '../loader/loader';
+import ButtonFavorite from '../button-favorite/button-favorite';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {getOffer, getNearbyOffers, getReviews, getIsDataLoaded} from '../../store/data/selectors';
 
@@ -43,6 +44,7 @@ function Offer() {
     isPremium,
     maxAdults,
     type,
+    isFavorite,
   } = offer;
 
   if (!isDataLoaded) {
@@ -56,7 +58,7 @@ function Offer() {
       <Header />
 
       <main className="page__main page__main--property">
-        <section className="property">
+        <section className="property" data-testid="offer">
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {images?.length && images.slice(0,6).map((image) => (
@@ -75,12 +77,7 @@ function Offer() {
               )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{title}</h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <ButtonFavorite isFavorite={isFavorite} id={+id} cardType="MAIN" type="BIG" />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">

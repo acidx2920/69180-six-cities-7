@@ -49,7 +49,7 @@ function Card(props) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <ButtonFavorite isFavorite={isFavorite} id={id} cardType={cardType} />
+          <ButtonFavorite isFavorite={isFavorite} id={id} cardType={cardType} type="SMALL" />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

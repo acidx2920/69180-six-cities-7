@@ -1,19 +1,12 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import {createAPI} from '../../services/api';
-import {AuthorizationStatus, AppRoute} from '../../consts';
-import App from './app';
-
-let history = null;
-let store = null;
-let fakeApp = null;
-
-window.scrollTo = jest.fn();
+import {Provider} from 'react-redux';
+import {render, screen} from '@testing-library/react';
+import Offer from './offer';
 
 const offers = [
   {
@@ -113,78 +106,37 @@ const reviews = [
   },
 ];
 
+window.scrollTo = jest.fn();
 
-describe('Application Routing', () => {
-  beforeAll(() => {
-    history = createMemoryHistory();
-    const api = createAPI(() => {});
-    const createFakeStore = configureStore([thunk.withExtraArgument(api)]);
-    store = createFakeStore({
-      USER: {
-        authorizationStatus: AuthorizationStatus.AUTH,
-        authorizationInfo: {},
-      },
-      DATA: {
-        offers,
-        offer,
-        nearbyOffers: offers,
-        favorites: [],
-        reviews,
-        isDataLoaded: true,
-      },
-      OFFERS: {
-        activeCity: 'Amsterdam',
-        activeSorting: 'Popular',
-      },
-    });
+const api = createAPI(() => {});
+const mockStore = configureStore([thunk.withExtraArgument(api)]);
 
-    fakeApp = (
-      <Provider store={store}>
+describe('Component: Offer', () => {
+  it('should render correctly', () => {
+    const history = createMemoryHistory();
+    render(
+      <Provider
+        store={mockStore({
+          DATA: {
+            offer: offer,
+            nearbyOffers: offers,
+            reviews,
+            isDataLoaded: true,
+          },
+          USER: {
+            authorizationStatus: 'AUTH',
+            authorizationInfo: {},
+          },
+        })}
+      >
         <Router history={history}>
-          <App />
+          <Offer />
         </Router>
-      </Provider>
+      </Provider>,
     );
-  });
 
-  it('should render "Main" when user navigates to "/"', () => {
-    history.push(AppRoute.ROOT);
-    render(fakeApp);
-
-    expect(screen.getByText(/places to stay in/i)).toBeInTheDocument();
-    expect(screen.getByText(/Beautiful & luxurious studio at great location/i)).toBeInTheDocument();
-  });
-
-  it('should render "Login" when user navigates to "/login"', () => {
-    history.push(AppRoute.LOGIN);
-    render(fakeApp);
-
-    expect(screen.getByTestId('login')).toBeInTheDocument();
-    expect(screen.getByTestId('password')).toBeInTheDocument();
-  });
-
-  it('should render "Offer" when user navigates to "/offer/121"', () => {
-    history.push('/offer/121');
-    render(fakeApp);
-
-    expect(screen.getByText(/A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam./i)).toBeInTheDocument();
-    expect(screen.getByText(/Coffee machine/i)).toBeInTheDocument();
-    expect(screen.getByText(/Angelina/i)).toBeInTheDocument();
-  });
-
-  it('should render "Favorites" when user navigates to "/favorites"', () => {
-    history.push(AppRoute.FAVORITES);
-    render(fakeApp);
-
-    expect(screen.getByText(/Nothing yet saved./i)).toBeInTheDocument();
-    expect(screen.getByText(/Save properties to narrow down search or plan your future trips./i)).toBeInTheDocument();
-  });
-
-  it('should render "Page404" when user navigates to non-existent route', () => {
-    history.push('/non-existent-route');
-    render(fakeApp);
-
-    expect(screen.getByText('404 Not Found')).toBeInTheDocument();
-    expect(screen.getByText('Back to main')).toBeInTheDocument();
+    expect(screen.getByText('Washing machine')).toBeInTheDocument();
+    expect(screen.getByText('Meet the host')).toBeInTheDocument();
+    expect(screen.getByTestId('offer')).toBeInTheDocument();
   });
 });

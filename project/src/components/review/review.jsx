@@ -1,4 +1,5 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import reviewProp from './review.prop';
 
 function Review(props) {
@@ -6,8 +7,12 @@ function Review(props) {
   const {
     comment,
     rating,
+    date,
     user: {avatarUrl, name},
   } = review;
+
+  const formattedDate = dayjs(date).format('MMMM YYYY');
+  const formattedDateTimeAttribute = dayjs(date).format('YYYY-MM-DD');
 
   return (
     <li className="reviews__item" data-testid="review">
@@ -25,7 +30,7 @@ function Review(props) {
           </div>
         </div>
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={formattedDateTimeAttribute}>{formattedDate}</time>
       </div>
     </li>
   );

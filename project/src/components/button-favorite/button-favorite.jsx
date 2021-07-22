@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import {removeFavorite, redirectToRoute} from '../../store/action';
 import {toggleFavorite} from '../../store/api-actions';
 import {getAuthorizationStatus} from '../../store/user/selectors';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {AppRoute, AuthorizationStatus, BookmarkButtonTypes} from '../../consts';
 
 function ButtonFavorite(props) {
   const {
     id,
-    isFavorite,
+    isFavorite = false,
     cardType,
+    type,
   } = props;
 
   const autorizationStatus = useSelector(getAuthorizationStatus);
@@ -30,12 +31,12 @@ function ButtonFavorite(props) {
 
   return (
     <button
-      className={`place-card__bookmark-button${isFavorite ? ' place-card__bookmark-button--active' : ''} button`}
+      className={`${BookmarkButtonTypes[type].classPrefix}__bookmark-button${isFavorite ? ` ${BookmarkButtonTypes[type].classPrefix}__bookmark-button--active` : ''} button`}
       type="button"
       onClick={handleClick}
       data-testid="button-favorite"
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className={`${BookmarkButtonTypes[type].classPrefix}__bookmark-icon`} width={BookmarkButtonTypes[type].width} height={BookmarkButtonTypes[type].width}>
         <use xlinkHref="#icon-bookmark" />
       </svg>
       <span className="visually-hidden">To bookmarks</span>
@@ -47,6 +48,7 @@ ButtonFavorite.propTypes = {
   id: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   cardType: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default ButtonFavorite;
