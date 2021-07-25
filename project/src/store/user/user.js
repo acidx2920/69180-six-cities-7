@@ -3,7 +3,7 @@ import {requireAuthorization, setAuthorizationInfo, logout} from '../action';
 import {AuthorizationStatus} from '../../consts';
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
   authorizationInfo: {},
 };
 

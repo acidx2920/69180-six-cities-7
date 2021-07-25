@@ -9,17 +9,17 @@ import {AppRoute, AuthorizationStatus, BookmarkButtonTypes} from '../../consts';
 function ButtonFavorite(props) {
   const {
     id,
-    isFavorite = false,
+    isFavorite,
     cardType,
     type,
   } = props;
 
-  const autorizationStatus = useSelector(getAuthorizationStatus);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
 
   const handleClick = (evt) => {
     evt.preventDefault();
-    if(autorizationStatus === AuthorizationStatus.NO_AUTH) {
+    if(authorizationStatus === AuthorizationStatus.NO_AUTH) {
       dispatch(redirectToRoute(AppRoute.LOGIN));
     } else {
       dispatch(toggleFavorite(id, isFavorite ? 0 : 1));

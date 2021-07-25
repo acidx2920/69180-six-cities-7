@@ -9,6 +9,8 @@ import {requireAuthorization} from './store/action';
 import {AuthorizationStatus} from './consts';
 import {redirect} from './store/middlewares/redirect';
 import browserHistory from './browser-history';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import App from './components/app/app';
 
 const api = createAPI(
@@ -29,6 +31,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter history={browserHistory}>
+        <ReactNotification />
         <App />
       </BrowserRouter>
     </Provider>

@@ -6,7 +6,7 @@ describe('Reducer: user', () => {
   it('without additional parameters should return initial state', () => {
     expect(user(undefined, {}))
       .toEqual({
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        authorizationStatus: AuthorizationStatus.UNKNOWN,
         authorizationInfo: {},
       });
   });

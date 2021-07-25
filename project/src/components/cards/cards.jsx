@@ -9,7 +9,7 @@ function Cards(props) {
     offers,
     type,
     activeOffer,
-    setActiveOffer,
+    onActiveCardChange,
   } = props;
 
   return (
@@ -20,17 +20,17 @@ function Cards(props) {
           offer={offer}
           type={type}
           isActive={offer.id === activeOffer?.id}
-          handleMouseEnter={
+          onCardMouseEnter={
             () => {
               if(type === 'MAIN') {
-                setActiveOffer(offer);
+                onActiveCardChange(offer);
               }
             }
           }
-          handleMouseLeave={
+          onCardMouseLeave={
             () => {
               if(type === 'MAIN') {
-                setActiveOffer(null);
+                onActiveCardChange(null);
               }
             }
           }
@@ -45,7 +45,7 @@ Cards.propTypes = {
   type: PropTypes.string,
   offers: PropTypes.arrayOf(offerProp),
   activeOffer: offerProp,
-  setActiveOffer: PropTypes.func,
+  onActiveCardChange: PropTypes.func,
 };
 
 export default Cards;

@@ -59,8 +59,8 @@ describe('Component: Card', () => {
             offer={offer}
             type="MAIN"
             isActive={false}
-            handleMouseEnter={() => {}}
-            handleMouseLeave={() => {}}
+            onCardMouseEnter={() => {}}
+            onCardMouseLeave={() => {}}
           />
         </Router>
       </Provider>,

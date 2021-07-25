@@ -7,10 +7,11 @@ import Footer from '../footer/footer';
 import Loader from '../loader/loader';
 import Cards from '../cards/cards';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
-import {getFavorites, getIsDataLoaded} from '../../store/data/selectors';
+import {getFavorites, getFavoritesByCity, getIsDataLoaded} from '../../store/data/selectors';
 
 function Favorites() {
   const favorites = useSelector(getFavorites);
+  const favoritesByCity = useSelector(getFavoritesByCity);
   const isDataLoaded = useSelector(getIsDataLoaded);
 
   const dispatch = useDispatch();
@@ -33,7 +34,6 @@ function Favorites() {
   }
 
   const favoritesCities = Array.from(new Set(favorites.map((offer) => offer.city.name)));
-  const favoritesByCity = (city) => favorites.filter((item) => item.city.name === city);
 
   return (
     <div className="page">

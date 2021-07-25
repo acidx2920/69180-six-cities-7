@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {showError} from '../notification';
 
 const BACKEND_URL = 'https://7.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
@@ -22,6 +23,7 @@ export const createAPI = (onUnauthorized) => {
       onUnauthorized();
     }
 
+    showError(response?.data?.error);
     throw err;
   };
 

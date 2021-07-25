@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CommentForm from '../comment-form/comment-form';
 import Review from '../review/review';
 import reviewProp from '../review/review.prop';
-import {AuthorizationStatus} from '../../consts';
+import {AuthorizationStatus, REVIEWS_MAX} from '../../consts';
 
 function Reviews(props) {
   const {reviews, id, authorizationStatus} = props;
@@ -12,7 +12,7 @@ function Reviews(props) {
   const reviewsPrepared = reviews
     .slice()
     .sort((reviewPrev, reviewNext) => new Date(reviewNext.date) - new Date(reviewPrev.date))
-    .slice(0, 10);
+    .slice(0, REVIEWS_MAX);
 
   return (
     <section className="property__reviews reviews" data-testid="reviews">

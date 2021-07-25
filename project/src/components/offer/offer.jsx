@@ -1,7 +1,7 @@
 import React, {useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
-import {OfferTypes} from '../../consts';
+import {OfferTypes, OFFER_IMAGES_MAX} from '../../consts';
 import {fetchOffer} from '../../store/api-actions';
 
 import Header from '../header/header';
@@ -47,7 +47,7 @@ function Offer() {
     isFavorite,
   } = offer;
 
-  if (!isDataLoaded) {
+  if (!isDataLoaded || !offer || !nearbyOffers.length) {
     return (
       <Loader />
     );
@@ -61,7 +61,7 @@ function Offer() {
         <section className="property" data-testid="offer">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images?.length && images.slice(0,6).map((image) => (
+              {images?.length && images.slice(0, OFFER_IMAGES_MAX).map((image) => (
                 <div className="property__image-wrapper" key={image}>
                   <img className="property__image" src={image} alt="Studio" />
                 </div>

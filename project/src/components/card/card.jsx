@@ -11,8 +11,8 @@ function Card(props) {
     offer,
     type: cardType,
     isActive,
-    handleMouseEnter,
-    handleMouseLeave,
+    onCardMouseEnter,
+    onCardMouseLeave,
   } = props;
 
   const {
@@ -29,8 +29,8 @@ function Card(props) {
   return (
     <article
       className={`${CardTypes[cardType].articleClass} place-card${isActive ? ' place-card--active' : ''}`}
-      onMouseEnter={() => handleMouseEnter(offer)}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => onCardMouseEnter(offer)}
+      onMouseLeave={onCardMouseLeave}
       data-testid="card"
     >
       {isPremium && (
@@ -70,8 +70,8 @@ Card.propTypes = {
   type: PropTypes.string.isRequired,
   offer: offerProp.isRequired,
   isActive: PropTypes.bool.isRequired,
-  handleMouseEnter: PropTypes.func.isRequired,
-  handleMouseLeave: PropTypes.func.isRequired,
+  onCardMouseEnter: PropTypes.func.isRequired,
+  onCardMouseLeave: PropTypes.func.isRequired,
 };
 
 export default Card;

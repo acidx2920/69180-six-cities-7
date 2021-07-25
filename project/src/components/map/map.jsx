@@ -8,13 +8,13 @@ import offerProp from '../offer/offer.prop';
 
 const iconDefault = leaflet.icon({
   iconUrl: DEFAULT_MARKER_URL,
-  iconSize: [30, 30],
-  iconAnchor: [15, 30],
+  iconSize: [27, 39],
+  iconAnchor: [13, 39],
 });
 const iconActive = leaflet.icon({
   iconUrl: ACTIVE_MARKER_URL,
-  iconSize: [30, 30],
-  iconAnchor: [15, 30],
+  iconSize: [27, 39],
+  iconAnchor: [13, 39],
 });
 
 function Map(props) {

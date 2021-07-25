@@ -9,6 +9,7 @@ export const AppRoute = {
 export const AuthorizationStatus = {
   AUTH: 'AUTH',
   NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
 };
 
 export const APIRoute = {
@@ -83,3 +84,5 @@ export const DEFAULT_CITY = 'Paris';
 export const DEFAULT_SORTING = SortingTypes.POPULAR;
 export const ACTIVE_MARKER_URL = 'img/pin-active.svg';
 export const DEFAULT_MARKER_URL = 'img/pin.svg';
+export const REVIEWS_MAX = 10;
+export const OFFER_IMAGES_MAX = 10;
